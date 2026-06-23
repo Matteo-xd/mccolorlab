@@ -1,0 +1,242 @@
+/**
+ * McColorLab - High-Fidelity Architectural Minecraft 1.21.11 Block Registry
+ */
+
+let MINECRAFT_BLOCKS = [];
+
+function generateFullBlockDatabase() {
+    const rawDatabase = [
+        // --- CONCRETES & POWDERS ---
+        { id: "white_concrete", name: "White Concrete", hex: "#cfd5d6" },
+        { id: "white_concrete_powder", name: "White Concrete Powder", hex: "#e2e4e4" },
+        { id: "light_gray_concrete", name: "Light Gray Concrete", hex: "#ababab" },
+        { id: "light_gray_concrete_powder", name: "Light Gray Concrete Powder", hex: "#c4c4c4" },
+        { id: "gray_concrete", name: "Gray Concrete", hex: "#36393f" },
+        { id: "gray_concrete_powder", name: "Gray Concrete Powder", hex: "#4e5157" },
+        { id: "black_concrete", name: "Black Concrete", hex: "#080a0f" },
+        { id: "black_concrete_powder", name: "Black Concrete Powder", hex: "#191a1f" },
+        { id: "red_concrete", name: "Red Concrete", hex: "#8e2121" },
+        { id: "red_concrete_powder", name: "Red Concrete Powder", hex: "#a83a3a" },
+        { id: "orange_concrete", name: "Orange Concrete", hex: "#e06100" },
+        { id: "orange_concrete_powder", name: "Orange Concrete Powder", hex: "#e68033" },
+        { id: "yellow_concrete", name: "Yellow Concrete", hex: "#f1af15" },
+        { id: "yellow_concrete_powder", name: "Yellow Concrete Powder", hex: "#f4c54c" },
+        { id: "lime_concrete", name: "Lime Concrete", hex: "#5ea818" },
+        { id: "lime_concrete_powder", name: "Lime Concrete Powder", hex: "#7ebd3a" },
+        { id: "green_concrete", name: "Green Concrete", hex: "#495b24" },
+        { id: "green_concrete_powder", name: "Green Concrete Powder", hex: "#617438" },
+        { id: "cyan_concrete", name: "Cyan Concrete", hex: "#157788" },
+        { id: "cyan_concrete_powder", name: "Cyan Concrete Powder", hex: "#3493a3" },
+        { id: "light_blue_concrete", name: "Light Blue Concrete", hex: "#2389c7" },
+        { id: "light_blue_concrete_powder", name: "Light Blue Concrete Powder", hex: "#4ba4d9" },
+        { id: "blue_concrete", name: "Blue Concrete", hex: "#2c2e8f" },
+        { id: "blue_concrete_powder", name: "Blue Concrete Powder", hex: "#4649a6" },
+        { id: "purple_concrete", name: "Purple Concrete", hex: "#641f9c" },
+        { id: "purple_concrete_powder", name: "Purple Concrete Powder", hex: "#8341b8" },
+        { id: "magenta_concrete", name: "Magenta Concrete", hex: "#a9309f" },
+        { id: "magenta_concrete_powder", name: "Magenta Concrete Powder", hex: "#c254b9" },
+        { id: "pink_concrete", name: "Pink Concrete", hex: "#d5658e" },
+        { id: "pink_concrete_powder", name: "Pink Concrete Powder", hex: "#e28db0" },
+        { id: "brown_concrete", name: "Brown Concrete", hex: "#4d3223" },
+        { id: "brown_concrete_powder", name: "Brown Concrete Powder", hex: "#664c3c" },
+
+        // --- STONES & BRICKS ---
+        { id: "stone", name: "Stone", hex: "#7d7d7d" },
+        { id: "smooth_stone", name: "Smooth Stone", hex: "#a1a1a1" },
+        { id: "stone_bricks", name: "Stone Bricks", hex: "#7a7a7a" },
+        { id: "mossy_stone_bricks", name: "Mossy Stone Bricks", hex: "#626b53" },
+        { id: "cracked_stone_bricks", name: "Cracked Stone Bricks", hex: "#757575" },
+        { id: "chiseled_stone_bricks", name: "Chiseled Stone Bricks", hex: "#717171" },
+        { id: "cobblestone", name: "Cobblestone", hex: "#6c6c6c" },
+        { id: "mossy_cobblestone", name: "Mossy Cobblestone", hex: "#5a674e" },
+        { id: "andesite", name: "Andesite", hex: "#838484" },
+        { id: "polished_andesite", name: "Polished Andesite", hex: "#858585" },
+        { id: "diorite", name: "Diorite", hex: "#bcbcbc" },
+        { id: "polished_diorite", name: "Polished Diorite", hex: "#c7c7c7" },
+        { id: "granite", name: "Granite", hex: "#95695b" },
+        { id: "polished_granite", name: "Polished Granite", hex: "#9b6b5d" },
+        { id: "calcite", name: "Calcite", hex: "#dfdeda" },
+
+        // --- DEEPSLATE VARIATIONS ---
+        { id: "deepslate", name: "Deepslate", hex: "#43434b" },
+        { id: "cobbled_deepslate", name: "Cobbled Deepslate", hex: "#4a4a52" },
+        { id: "polished_deepslate", name: "Polished Deepslate", hex: "#48484f" },
+        { id: "deepslate_bricks", name: "Deepslate Bricks", hex: "#39393c" },
+        { id: "cracked_deepslate_bricks", name: "Cracked Deepslate Bricks", hex: "#343437" },
+        { id: "deepslate_tiles", name: "Deepslate Tiles", hex: "#2b2b2e" },
+        { id: "cracked_deepslate_tiles", name: "Cracked Deepslate Tiles", hex: "#27272a" },
+        { id: "chiseled_deepslate", name: "Chiseled Deepslate", hex: "#323237" },
+
+        // --- TUFF FAMILY ---
+        { id: "tuff", name: "Tuff", hex: "#5d6254" },
+        { id: "polished_tuff", name: "Polished Tuff", hex: "#64675b" },
+        { id: "tuff_bricks", name: "Tuff Bricks", hex: "#5d6054" },
+        { id: "chiseled_tuff", name: "Chiseled Tuff", hex: "#56594e" },
+
+        // --- SANDSTONES ---
+        { id: "sandstone", name: "Sandstone", hex: "#dcb66c" },
+        { id: "chiseled_sandstone", name: "Chiseled Sandstone", hex: "#d7af64" },
+        { id: "cut_sandstone", name: "Cut Sandstone", hex: "#d5ac60" },
+        { id: "smooth_sandstone", name: "Smooth Sandstone", hex: "#daaf62" },
+        { id: "red_sandstone", name: "Red Sandstone", hex: "#b45d2d" },
+        { id: "chiseled_red_sandstone", name: "Chiseled Red Sandstone", hex: "#ad5727" },
+        { id: "cut_red_sandstone", name: "Cut Red Sandstone", hex: "#ab5525" },
+        { id: "smooth_red_sandstone", name: "Smooth Red Sandstone", hex: "#b15a2a" },
+
+        // --- QUARTZ ---
+        { id: "quartz_block", name: "Quartz Block", hex: "#e7e8e3" },
+        { id: "quartz_bricks", name: "Quartz Bricks", hex: "#e5e5e0" },
+        { id: "quartz_pillar", name: "Quartz Pillar", hex: "#e5e7e2" },
+        { id: "smooth_quartz", name: "Smooth Quartz Block", hex: "#e9eae5" },
+        { id: "chiseled_quartz", name: "Chiseled Quartz", hex: "#e5e6e0" },
+
+        // --- NETHER BLOCKS ---
+        { id: "netherrack", name: "Netherrack", hex: "#722b2b" },
+        { id: "nether_bricks", name: "Nether Bricks", hex: "#2c1115" },
+        { id: "cracked_nether_bricks", name: "Cracked Nether Bricks", hex: "#260e12" },
+        { id: "chiseled_nether_bricks", name: "Chiseled Nether Bricks", hex: "#2f1216" },
+        { id: "red_nether_bricks", name: "Red Nether Bricks", hex: "#440a0f" },
+        { id: "basalt", name: "Basalt", hex: "#4f4f51" },
+        { id: "polished_basalt", name: "Polished Basalt", hex: "#5b5b5d" },
+        { id: "smooth_basalt", name: "Smooth Basalt", hex: "#48484a" },
+        { id: "blackstone", name: "Blackstone", hex: "#27222c" },
+        { id: "gilded_blackstone", name: "Gilded Blackstone", hex: "#372c2a" },
+        { id: "polished_blackstone", name: "Polished Blackstone", hex: "#2b2632" },
+        { id: "polished_blackstone_bricks", name: "Polished Blackstone Bricks", hex: "#1f1c24" },
+        { id: "cracked_polished_blackstone_bricks", name: "Cracked Blackstone Bricks", hex: "#1c1920" },
+        { id: "chiseled_polished_blackstone", name: "Chiseled Blackstone", hex: "#24202a" },
+        { id: "magma_block", name: "Magma Block", hex: "#8a3117" },
+        { id: "soul_sand", name: "Soul Sand", hex: "#513e33" },
+        { id: "soul_soil", name: "Soul Soil", hex: "#4c3a2f" },
+
+        // --- END BLOCKS ---
+        { id: "end_stone", name: "End Stone", hex: "#deecb2" },
+        { id: "end_stone_bricks", name: "End Stone Bricks", hex: "#e1eba9" },
+        { id: "purpur_block", name: "Purpur Block", hex: "#a97db0" },
+        { id: "purpur_pillar", name: "Purpur Pillar", hex: "#ab81b2" },
+
+        // --- WOOD FAMILY (PLANKS, LOGS, STRIPPED, WOOD) ---
+        { id: "oak_planks", name: "Oak Planks", hex: "#b48e58" },
+        { id: "oak_log", name: "Oak Log", hex: "#735735" },
+        { id: "stripped_oak_log", name: "Stripped Oak Log", hex: "#b18f5a" },
+        { id: "oak_wood", name: "Oak Wood", hex: "#5b4328" },
+        { id: "spruce_planks", name: "Spruce Planks", hex: "#6b5030" },
+        { id: "spruce_log", name: "Spruce Log", hex: "#3e2c18" },
+        { id: "stripped_spruce_log", name: "Stripped Spruce Log", hex: "#685032" },
+        { id: "spruce_wood", name: "Spruce Wood", hex: "#2d1f10" },
+        { id: "birch_planks", name: "Birch Planks", hex: "#c6b574" },
+        { id: "birch_log", name: "Birch Log", hex: "#d0cbbf" },
+        { id: "stripped_birch_log", name: "Stripped Birch Log", hex: "#c3b275" },
+        { id: "birch_wood", name: "Birch Wood", hex: "#d3cfc5" },
+        { id: "jungle_planks", name: "Jungle Planks", hex: "#b47e5d" },
+        { id: "jungle_log", name: "Jungle Log", hex: "#56442b" },
+        { id: "stripped_jungle_log", name: "Stripped Jungle Log", hex: "#a17a56" },
+        { id: "jungle_wood", name: "Jungle Wood", hex: "#544229" },
+        { id: "acacia_planks", name: "Acacia Planks", hex: "#ba6639" },
+        { id: "acacia_log", name: "Acacia Log", hex: "#665e57" },
+        { id: "stripped_acacia_log", name: "Stripped Acacia Log", hex: "#b25c31" },
+        { id: "acacia_wood", name: "Acacia Wood", hex: "#615952" },
+        { id: "dark_oak_planks", name: "Dark Oak Planks", hex: "#463019" },
+        { id: "dark_oak_log", name: "Dark Oak Log", hex: "#2c1e11" },
+        { id: "stripped_dark_oak_log", name: "Stripped Dark Oak Log", hex: "#3f2b16" },
+        { id: "dark_oak_wood", name: "Dark Oak Wood", hex: "#24170c" },
+        { id: "mangrove_planks", name: "Mangrove Planks", hex: "#763631" },
+        { id: "mangrove_log", name: "Mangrove Log", hex: "#4a3b32" },
+        { id: "stripped_mangrove_log", name: "Stripped Mangrove Log", hex: "#71302b" },
+        { id: "mangrove_wood", name: "Mangrove Wood", hex: "#46382f" },
+        { id: "cherry_planks", name: "Cherry Planks", hex: "#e29da4" },
+        { id: "cherry_log", name: "Cherry Log", hex: "#4a2c31" },
+        { id: "stripped_cherry_log", name: "Stripped Cherry Log", hex: "#e299a0" },
+        { id: "cherry_wood", name: "Cherry Wood", hex: "#3d2327" },
+        { id: "bamboo_planks", name: "Bamboo Planks", hex: "#af994a" },
+        { id: "bamboo_block", name: "Bamboo Block", hex: "#53632e" },
+        { id: "stripped_bamboo_block", name: "Stripped Bamboo Block", hex: "#9d8843" },
+        { id: "crimson_planks", name: "Crimson Planks", hex: "#6a3246" },
+        { id: "crimson_stem", name: "Crimson Stem", hex: "#441a23" },
+        { id: "stripped_crimson_stem", name: "Stripped Crimson Stem", hex: "#682e42" },
+        { id: "crimson_hyphae", name: "Crimson Hyphae", hex: "#441922" },
+        { id: "warped_planks", name: "Warped Planks", hex: "#2f6f6d" },
+        { id: "warped_stem", name: "Warped Stem", hex: "#3a253c" },
+        { id: "stripped_warped_stem", name: "Stripped Warped Stem", hex: "#2c6967" },
+        { id: "warped_hyphae", name: "Warped Hyphae", hex: "#39233a" },
+
+        // --- CORAL BLOCKS ---
+        { id: "tube_coral_block", name: "Tube Coral Block", hex: "#325ca7" },
+        { id: "brain_coral_block", name: "Brain Coral Block", hex: "#c45fa3" },
+        { id: "bubble_coral_block", name: "Bubble Coral Block", hex: "#a4229b" },
+        { id: "fire_coral_block", name: "Fire Coral Block", hex: "#b4242b" },
+        { id: "horn_coral_block", name: "Horn Coral Block", hex: "#ca9e33" },
+        { id: "dead_tube_coral_block", name: "Dead Tube Coral Block", hex: "#6b6665" },
+        { id: "dead_brain_coral_block", name: "Dead Brain Coral Block", hex: "#716b6a" },
+        { id: "dead_bubble_coral_block", name: "Dead Bubble Coral Block", hex: "#666160" },
+        { id: "dead_fire_coral_block", name: "Dead Fire Coral Block", hex: "#686362" },
+        { id: "dead_horn_coral_block", name: "Dead Horn Coral Block", hex: "#777270" },
+
+        // --- TERRACOTTAS ---
+        { id: "terracotta", name: "Terracotta (Natural)", hex: "#935e47" },
+        { id: "white_terracotta", name: "White Terracotta", hex: "#be998d" },
+        { id: "orange_terracotta", name: "Orange Terracotta", hex: "#9e5531" },
+        { id: "magenta_terracotta", name: "Magenta Terracotta", hex: "#93516c" },
+        { id: "light_blue_terracotta", name: "Light Blue Terracotta", hex: "#6f6e85" },
+        { id: "yellow_terracotta", name: "Yellow Terracotta", hex: "#b68233" },
+        { id: "lime_terracotta", name: "Lime Terracotta", hex: "#667133" },
+        { id: "pink_terracotta", name: "Pink Terracotta", hex: "#9b4b4f" },
+        { id: "gray_terracotta", name: "Gray Terracotta", hex: "#392d24" },
+        { id: "light_gray_terracotta", name: "Light Gray Terracotta", hex: "#876b62" },
+        { id: "cyan_terracotta", name: "Cyan Terracotta", hex: "#56595b" },
+        { id: "purple_terracotta", name: "Purple Terracotta", hex: "#764656" },
+        { id: "blue_terracotta", name: "Blue Terracotta", hex: "#4a3c5b" },
+        { id: "brown_terracotta", name: "Brown Terracotta", hex: "#4d3324" },
+        { id: "green_terracotta", name: "Green Terracotta", hex: "#4c532a" },
+        { id: "red_terracotta", name: "Red Terracotta", hex: "#763e2c" },
+        { id: "black_terracotta", name: "Black Terracotta", hex: "#251610" },
+
+        // --- COPPER FAMILY ---
+        { id: "copper_block", name: "Copper Block", hex: "#c17053" },
+        { id: "exposed_copper", name: "Exposed Copper", hex: "#a37e69" },
+        { id: "weathered_copper", name: "Weathered Copper", hex: "#66927d" },
+        { id: "oxidized_copper", name: "Oxidized Copper", hex: "#52a38f" },
+        { id: "waxed_copper_block", name: "Waxed Copper Block", hex: "#c17053" },
+        { id: "waxed_exposed_copper", name: "Waxed Exposed Copper", hex: "#a37e69" },
+        { id: "waxed_weathered_copper", name: "Waxed Weathered Copper", hex: "#66927d" },
+        { id: "waxed_oxidized_copper", name: "Waxed Oxidized Copper", hex: "#52a38f" },
+
+        // --- PRISMARINES ---
+        { id: "prismarine", name: "Prismarine", hex: "#629388" },
+        { id: "prismarine_bricks", name: "Prismarine Bricks", hex: "#639c97" },
+        { id: "dark_prismarine", name: "Dark Prismarine", hex: "#354d48" },
+        { id: "sea_lantern", name: "Sea Lantern", hex: "#b1c4b9" },
+
+        // --- BRICKS & MUD ---
+        { id: "bricks", name: "Bricks", hex: "#945b4c" },
+        { id: "mud_bricks", name: "Mud Bricks", hex: "#5a4f43" },
+        { id: "packed_mud", name: "Packed Mud", hex: "#8d7864" },
+        { id: "clay", name: "Clay Block", hex: "#a2a7b4" },
+
+        // --- ORGANICS, FLORA & UTILITY ---
+        { id: "dirt", name: "Dirt", hex: "#866043" },
+        { id: "coarse_dirt", name: "Coarse Dirt", hex: "#77553b" },
+        { id: "rooted_dirt", name: "Rooted Dirt", hex: "#926d50" },
+        { id: "mud", name: "Mud Block", hex: "#3c3937" },
+        { id: "moss_block", name: "Moss Block", hex: "#5a7a30" },
+        { id: "glowstone", name: "Glowstone", hex: "#bf9b61" },
+        { id: "obsidian", name: "Obsidian", hex: "#14111e" },
+        { id: "crying_obsidian", name: "Crying Obsidian", hex: "#20143a" },
+        { id: "bone_block", name: "Bone Block", hex: "#e1dbbf" }, // FIXED: Cleaned trailing characters
+        { id: "hay_block", name: "Hay Bale", hex: "#a58e1c" },
+        { id: "melon", name: "Melon Block", hex: "#597a17" },
+        { id: "pumpkin", name: "Pumpkin", hex: "#c36d15" },
+        { id: "sponge", name: "Sponge", hex: "#c2b544" },
+        { id: "wet_sponge", name: "Wet Sponge", hex: "#a0a446" },
+        { id: "amethyst_block", name: "Amethyst Block", hex: "#8a62c4" },
+        { id: "ochre_froglight", name: "Ochre Froglight", hex: "#fcf6dd" },
+        { id: "pearlescent_froglight", name: "Pearlescent Froglight", hex: "#fbe6fa" },
+        { id: "verdant_froglight", name: "Verdant Froglight", hex: "#edf8f0" }
+    ];
+
+    MINECRAFT_BLOCKS = rawDatabase;
+}
+
+function getBlockImageUrl(blockId) {
+    return `https://assets.mcasset.cloud/1.21/assets/minecraft/textures/block/${blockId}.png`;
+}

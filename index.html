@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McColorLab - Minecraft Palette & Gradient Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="theme-switch-container" id="theme-toggle-btn">
+            <div class="theme-toggle-box">
+                <div class="theme-toggle-handle"></div>
+            </div>
+            <span>Theme Switch</span>
+        </div>
+        
+        <h1>🧪 McColorLab</h1>
+        <p>Click a block to set <strong>Start</strong>, then click another to set <strong>End</strong></p>
+    </header>
+
+    <main>
+        <section id="gradient-section">
+            <h2>Gradient Generator</h2>
+            <div class="gradient-controls">
+                
+                <div class="selected-preview-box">
+                    <div id="preview-start" class="preview-slot empty">
+                        <div class="slot-image"></div>
+                        <span>Start: Select a block</span>
+                    </div>
+                    <div class="slot-arrow">➡️</div>
+                    <div id="preview-end" class="preview-slot empty">
+                        <div class="slot-image"></div>
+                        <span>End: Select a block</span>
+                    </div>
+                    <button id="reset-selection-btn" title="Clear selection">❌</button>
+                </div>
+
+                <div class="control-group slider-group">
+                    <label for="gradient-length">Length: <span id="length-val">6</span></label>
+                    <input type="range" id="gradient-length" min="3" max="15" value="6">
+                </div>
+
+                <div class="control-group checkbox-group">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="no-duplicates" checked>
+                        <span class="checkmark"></span>
+                        No Duplicates
+                    </label>
+                </div>
+
+                <button id="generate-btn">Generate Blend</button>
+            </div>
+            
+            <div id="gradient-result" class="gradient-output"></div>
+        </section>
+
+        <section id="palette-section">
+            <div class="palette-header">
+                <h2>Block Palette (<span id="palette-count">0</span> full blocks)</h2>
+                <input type="text" id="search-bar" placeholder="Search blocks (e.g. copper, concrete, oak)..." autocomplete="off">
+            </div>
+            <div id="block-container" class="block-grid"></div>
+        </section>
+    </main>
+
+    <script src="blocks.js"></script>
+    <script src="app.js"></script>
+
+    <script>
+        document.getElementById('theme-toggle-btn').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
+</body>
+</html>
