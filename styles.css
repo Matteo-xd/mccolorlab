@@ -554,3 +554,92 @@ body.dark-mode ::-webkit-scrollbar-thumb {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--cobalt-premium);
 }
+
+.block-card::before {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: -150%;
+    width: 50%; 
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 1; /* Puts the shine behind the text */
+    pointer-events: none;
+}
+
+body.dark-mode .block-card::before {
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
+}
+
+.block-card:hover::before {
+    left: 150%;
+    transition: left 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.block-card span, .gradient-block strong {
+    z-index: 2; /* Ensures text stays readable above the shine */
+}
+
+@keyframes levitate {
+    0%, 100% { transform: scale(1.08) rotate(3deg) translateY(0px); }
+    50% { transform: scale(1.08) rotate(5deg) translateY(-6px); }
+}
+
+.preview-slot:not(.empty) .slot-image {
+    animation: levitate 3s ease-in-out infinite;
+    box-shadow: 0 15px 25px var(--cobalt-soft);
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(47, 84, 255, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(47, 84, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(47, 84, 255, 0); }
+}
+
+#generate-btn {
+    animation: pulseGlow 2.5s infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+#generate-btn:hover {
+    animation: none; /* Stops pulsing when they hover */
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(47, 84, 255, 0.35);
+}
+
+@keyframes fadeUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+header {
+    animation: fadeUp 0.8s var(--smooth-elastic) forwards;
+}
+
+#gradient-section {
+    opacity: 0;
+    animation: fadeUp 0.8s var(--smooth-elastic) 0.2s forwards;
+}
+
+#palette-section {
+    opacity: 0;
+    animation: fadeUp 0.8s var(--smooth-elastic) 0.4s forwards;
+}
+
+.block-card {
+    animation: fadeUp 0.6s var(--smooth-elastic) backwards;
+}
+.block-card:nth-child(1) { animation-delay: 0.45s; }
+.block-card:nth-child(2) { animation-delay: 0.50s; }
+.block-card:nth-child(3) { animation-delay: 0.55s; }
+.block-card:nth-child(4) { animation-delay: 0.60s; }
+.block-card:nth-child(5) { animation-delay: 0.65s; }
