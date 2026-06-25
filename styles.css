@@ -49,6 +49,22 @@ body {
     transition: background-color 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.4s ease;
 }
 
+body {
+    cursor: url('https://assets.mcasset.cloud/1.21/assets/minecraft/textures/item/netherite_sword.png') 0 0, auto !important;
+}
+
+.block-card, 
+button, 
+input[type="checkbox"], 
+input[type="range"], 
+.theme-switch-container {
+    cursor: url('https://assets.mcasset.cloud/1.21/assets/minecraft/textures/item/netherite_pickaxe.png') 14 2, pointer !important;
+}
+
+.block-card:hover {
+    cursor: url('https://assets.mcasset.cloud/1.21/assets/minecraft/textures/item/netherite_pickaxe.png') 14 2, pointer !important;
+}
+
 header, main {
     max-width: 1440px;
     margin: 0 auto;
@@ -643,3 +659,58 @@ header {
 .block-card:nth-child(3) { animation-delay: 0.55s; }
 .block-card:nth-child(4) { animation-delay: 0.60s; }
 .block-card:nth-child(5) { animation-delay: 0.65s; }
+
+body::before {
+    content: '';
+    position: fixed;
+    top: -50vh;
+    left: -50vw;
+    width: 200vw;
+    height: 200vh;
+    background: radial-gradient(circle at 50% 50%, var(--cobalt-soft) 0%, transparent 40%);
+    z-index: -1;
+    pointer-events: none;
+    animation: ambientShift 20s ease-in-out infinite alternate;
+}
+
+@keyframes ambientShift {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(5%, 5%) scale(1.1); }
+    100% { transform: translate(-5%, -5%) scale(0.95); }
+}
+
+@keyframes nudgeRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+}
+
+.slot-arrow {
+    display: inline-block;
+    animation: nudgeRight 2s ease-in-out infinite;
+    filter: drop-shadow(0 2px 4px var(--cobalt-soft));
+}
+
+#search-bar {
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body.dark-mode #search-bar {
+    background-color: rgba(15, 17, 21, 0.4);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#search-bar:focus {
+    transform: translateY(-2px);
+    background-color: var(--studio-white);
+    box-shadow: inset 0 0 0 transparent, 0 10px 30px var(--cobalt-soft);
+}
+
+.block-card:active {
+    transform: scale(0.95) translateY(0); /* Squish effect */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
